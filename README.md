@@ -1,4 +1,5 @@
 #LazyStack
+http://autotel.co/2016/09/10/lazy-stacking/
 
 > A snippet for infinite function stacking, and also for when you have time critical tasks that need to be interleaved with slow tasks that are not time critical.
 
