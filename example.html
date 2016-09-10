@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>example of lazyStack</title>
+    <style>
+    #progress{
+      position:relative;
+      width:100%;
+    }
+    #bar{
+      background-color: crimson;
+      position:absolute;
+      top:0;
+      left: 0;
+      transition: 0.02s;
+      height:200px;
+    }
+    </style>
+  </head>
+  <body>
+    <h1 id="pinum"></h1>
+    <div id="progress">
+      <div id="bar">--</div>
+    </div>
+  </body>
+  <script src="lazyStack.js"></script>
+  <script>
+  var progressBar=document.getElementById('bar');
+  var outputDiv=pinum;
+  function draw() {
+    requestAnimationFrame(draw);
+    progressBar.style.width=(lazyStack.queue.length/10)+"%";
+    progressBar.innerHTML=lazyStack.queue.length;
+    console.log(lazyStack.queue.length);
+    lazyStack.frame();
+
+  }
+  function randomStack(){
+    //some inefficient code here that stacks itself to a random level
+    var chance=Math.random();
+    document.getElementById('pinum').innerHTML=chance;
+    if(chance>0.02){
+      //example of how to add a function to the stack that will stack no matter what
+      lazyStack.add(randomStack);
+      //example of how to add a function that will replace others that have the same name
+      // lazyStack.add(randomStack,"random");
+    }else{
+    }
+  }
+  draw();
+  var mouse=(function(){
+    var parent=this;
+    this.x,this.y;
+    document.addEventListener("mousemove",function(e){
+      parent.x=e.clientX;
+      parent.y=e.clientY;
+      lazyStack.add(randomStack);
+    });
+    return this;
+  })();
+  </script>
+</html>
