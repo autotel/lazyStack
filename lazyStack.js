@@ -20,8 +20,13 @@ var lazyStack = (function() {
     if (this.queue.length > 0) {
       // console.log(this.queue.length+"run:"+this.queue[0][0]);
       var a = 0;
-      this.queue[a][1]();
-      this.queue.splice(a, 1);
+      if(this.queue[a][1]){
+        this.queue[a][1]();
+        this.queue.splice(a, 1);
+      }else{
+        this.queue.splice(a, 1);
+        throw "lazyStack exception: on stack n "+a+": no function assigned";
+      }
     }
   }
   return this;
